@@ -1,4 +1,4 @@
-local QBCore = exports['qb-core']:GetCoreObject()
+local RSGCore = exports['rsg-core']:GetCoreObject()
 local useDebug = Config.Debug
 
 local playerSkillsCache = {}
@@ -35,7 +35,7 @@ end
 
 local function fetchSkillsFromDb(source)
     if useDebug then print('fetching for', source) end
-    local Player = QBCore.Functions.GetPlayer(source)
+    local Player = RSGCore.Functions.GetPlayer(source)
     if Player then
         local status = MySQL.scalar.await('SELECT skills FROM players WHERE citizenid = ?', {Player.PlayerData.citizenid})
         if useDebug then print('result', json.encode(status, {indent=true})) end
@@ -53,7 +53,7 @@ local function fetchSkillsFromDb(source)
 end
 
 local function updateCachedSkills(source, skill, amount)
-    local Player = QBCore.Functions.GetPlayer(source)
+    local Player = RSGCore.Functions.GetPlayer(source)
     if not Player then return end
 
     local citizenid = Player.PlayerData.citizenid
@@ -75,8 +75,8 @@ local function batchUpdateDatabase()
     playersWithChanges = {}
 end
 
-QBCore.Functions.CreateCallback('cw-rep:server:fetchStatus', function(source, cb)
-    local Player = QBCore.Functions.GetPlayer(source)
+RSGCore.Functions.CreateCallback('cw-rep:server:fetchStatus', function(source, cb)
+    local Player = RSGCore.Functions.GetPlayer(source)
     if not Player then cb(nil); return end
 
     local citizenid = Player.PlayerData.citizenid
@@ -90,22 +90,12 @@ end)
 
 RegisterServerEvent('cw-rep:server:update', function (data)
     local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
+    local Player = RSGCore.Functions.GetPlayer(src)
     if not Player then return end
 
     local citizenid = Player.PlayerData.citizenid
     playerSkillsCache[citizenid] = json.decode(data)
     playersWithChanges[citizenid] = true
-end)
-
-RegisterNetEvent('cw-rep:server:triggerEmail', function(citizenid, sender, subject, message)
-    SetTimeout(math.random(Config.EmailWaitTimes.min, Config.EmailWaitTimes.max), function()
-        TriggerEvent('qb-phone:server:sendNewMail', {
-            sender = sender,
-            subject = subject,
-            message = message,
-        }, citizenid)
-    end)
 end)
 
 local function updateSkill(source, skill, amount)
@@ -115,7 +105,7 @@ local function updateSkill(source, skill, amount)
 end exports('updateSkill', updateSkill)
 
 local function fetchSkills(source)
-    local Player = QBCore.Functions.GetPlayer(source)
+    local Player = RSGCore.Functions.GetPlayer(source)
     if not Player then return nil end
 
     local citizenid = Player.PlayerData.citizenid
@@ -125,12 +115,12 @@ local function fetchSkills(source)
     return playerSkillsCache[citizenid]
 end exports('fetchSkills', fetchSkills)
 
-QBCore.Commands.Add('giveskill', "Skill up... or down", { { name = 'player id', help = 'the id of the player' },{ name = 'skill name', help = '"Food Delivery" for example' }, { name = 'skill amount', help = 'add - for negative' } }, true, function(source, args)
+RSGCore.Commands.Add('giveskill', "Skill up... or down", { { name = 'player id', help = 'the id of the player' },{ name = 'skill name', help = '"Food Delivery" for example' }, { name = 'skill amount', help = 'add - for negative' } }, true, function(source, args)
     print('command: Updating skill for ', args[1], args[2], args[3])
     updateSkill(tonumber(args[1]), args[2], tonumber(args[3]))
 end, "admin")
 
-QBCore.Commands.Add('fetchSkills', "Print skills for player with source", { { name = 'source', help = 'the id of the player' },}, true, function(source, args)
+RSGCore.Commands.Add('fetchSkills', "Print skills for player with source", { { name = 'source', help = 'the id of the player' },}, true, function(source, args)
     print('command: Fetching skill for ', args[1])
     local skills = fetchSkills(tonumber(args[1]))
     print('^2 Player lockpicking skills:', skills.lockpicking)

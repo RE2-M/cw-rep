@@ -1,8 +1,8 @@
-local QBCore = exports['qb-core']:GetCoreObject()
+local RSGCore = exports['rsg-core']:GetCoreObject()
 
 mySkills = {}
 
-RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
+RegisterNetEvent('RSGCore:Client:OnPlayerLoaded', function()
     if Config.LoseSkillsOverTime then
 	    Citizen.CreateThread(function()
             while true do

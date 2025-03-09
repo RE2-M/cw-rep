@@ -1,8 +1,8 @@
-local QBCore = exports['qb-core']:GetCoreObject()
+local RSGCore = exports['rsg-core']:GetCoreObject()
 local useDebug = Config.Debug
 
 function notify(message, type)
-    QBCore.Functions.Notify(message, type)
+    RSGCore.Functions.Notify(message, type)
 end
 
 function getLevel(currentSkill, skillName)
@@ -57,10 +57,15 @@ local function handleNotification(skill, prevAmount, newAmount)
                     notify(messageObj.message,'success')
                 else
                     local sender = messageObj.sender
-                    local message = messageObj.message
                     local subject = messageObj.subject
-                    local citizenid = QBCore.Functions.GetPlayerData().citizenid
-                    TriggerServerEvent('cw-rep:server:triggerEmail', citizenid, sender, subject, message)
+                    local message = messageObj.message
+                    lib.notify({
+                        title = sender..': '..subject,
+                        description = message,
+                        type = 'success',
+                        iconAnimation:'bounce',
+                        icon = 'fa-solid fa-circle-up'
+                    })
                 end
             end
         end
@@ -99,7 +104,7 @@ function updateSkill(skill, amount)
 end exports('updateSkill', updateSkill)
 
 function fetchSkills()
-    QBCore.Functions.TriggerCallback("cw-rep:server:fetchStatus", function(data)
+    RSGCore.Functions.TriggerCallback("cw-rep:server:fetchStatus", function(data)
         if useDebug then print('Skills:', json.encode(data, {indent=true})) end
 		mySkills = data
     end)
@@ -130,7 +135,7 @@ local function getSkillInfo(skill)
     end
 end exports('getSkillInfo', getSkillInfo)
 
-RegisterNetEvent("QBCore:Client:OnPlayerLoaded", function()
+RegisterNetEvent("RSGCore:Client:OnPlayerLoaded", function()
     Wait(2000)
     if useDebug then print('Fetching skills for player') end
     fetchSkills()

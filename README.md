@@ -1,26 +1,16 @@
 # cw-rep
 
-- A database held skill/XP system for qb (optimized from mz-skills)
+- A database held skill/XP system for rsg (optimized from mz-skills)
 - Full backwards compatibility with mz-skills exports (no need to upgrade all your scripts using mz skills)
-- Supports QB menu and OX menu
+- Supports OX menu
 - Only updates database every X minutes rather than on-update
 
 > All credit to MrZainRP for [mz-skills](https://github.com/MrZainRP/mz-skills) which this is based on. Great script.
 
 > Something cw-rep DOES NOT have: GTAs standard character skills
 
-> QB menu is supported... but probably won't recieve many updates or fixes unless critical, and might have limited functionality compared to OX
 
-# Links and stuff
-### ⭐ Check out our [Tebex store](https://cw-scripts.tebex.io/category/2523396) for some cheap scripts ⭐
 
-### [More free scripts](https://github.com/stars/Coffeelot/lists/cw-scripts)  👈
-
-**Support, updates and script previews**: [Join The discord!](https://discord.gg/FJY4mtjaKr)
-
-If you want to support what we do, you can buy us a coffee here:
-
-[![Buy Us a Coffee](https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-2.svg)](https://www.buymeacoffee.com/cwscriptbois )
 
 
 # Installation
@@ -29,7 +19,7 @@ If you want to support what we do, you can buy us a coffee here:
 - If you are changing from mz-skills: 
     - Make sure to update the cw-rep skills in the Config to match mz-skills if you want to keep the names you have
     - Remove the mz-skills folder
-- Add ``start cw-rep`` to your server.cfg (or simply make sure cw-rep is in your [qb] folder)
+- Add ``start cw-rep`` to your server.cfg (or simply make sure cw-rep is in your [rsg] folder)
 
 > CW-rep has a new (optimized) database format compared to mz-skills, but this conversion is done while the script is being used. This might cause some older unused characters to still have the old format until used
 
@@ -128,7 +118,7 @@ exports["cw-rep"]:checkSkill("Searching", 100, function(hasskill)
     if hasskill then
         TriggerEvent('mz-bins:client:Reward')
     else
-        QBCore.Functions.Notify('You need at least 100XP in Searching to do this.', "error", 3500)
+        RSGCore.Functions.Notify('You need at least 100XP in Searching to do this.', "error", 3500)
     end
 end)
 ```
@@ -217,7 +207,7 @@ An example of how to use this would be:
 > `source` should obviously be the player source
 
 ## Radial Menu
-For radial menu access to "skills" command add this to qb-radialmenu/config.lua somewhere that looks fitting:
+For radial menu access to "skills" command add this to rsg-radialmenu/config.lua somewhere that looks fitting:
 ```lua
     [3] = {
         id = 'skills',
