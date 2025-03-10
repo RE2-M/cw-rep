@@ -49,22 +49,12 @@ Config.DefaultLevels = {
 }
 
 Config.Skills = {
-    taxi = {
-        label = 'Taxi',
-        icon = 'fas fa-taxi',
-    },
-    househeft = {
-        label = 'House Theft',
-        icon = 'fas fa-house',
-    },
-    pizza = {
-        label = 'Pizza',
-        icon = 'fas fa-house',
-    },
-    containers = {
+    riding = {
+        label = 'Riding',
         icon = 'fas fa-house',
     },
     streetreputation = {
+        label="Street Reputation",
         icon = 'fas fa-mask',
         skillLevels = {
             { title = "Unknown", from = 00, to = 1000 },
@@ -77,33 +67,32 @@ Config.Skills = {
             { title = "Boss", from = 9000, to = 10000 }, 
         }
     },
-    crafting = {
-        icon = 'fas fa-wrench',
+    foodCrafting = {
+        label= 'Food Crafting',
+        icon = 'fas fa-hamburger',
     },
     gun_crafting = {
         icon = 'fas fa-gun',
         label = 'Weapon crafting',
     },
-    scrapping = {
-        icon = 'fas fa-cannabis',
+    crafting = {
+        icon = 'fas fa-wrench',
+        label = 'Crafting',
     },
-    delivery = {
-        icon = 'fas fa-truck-arrow-right',
+    blacksmith = {
+        icon = 'fas fa-wrench',
+        label = 'blacksmith',
     },
-    fishing = {
-        icon = 'fas fa-fish-fins',
-    },
-    garbage = {
-        icon = 'fas fa-trash-can',
-    },
-    hotdog = {
-        icon = 'fas fa-hotdog',
-    },
-    drugSales = {
-        icon = 'fas fa-pills',
-    },
-    hotwiring = {
-        icon = 'fas fa-car',
+    medical = {
+        icon = 'fas fa-first-aid',
+        label = 'Medical',
+        messages = {
+            { notify = true, level = 50, message = "They can call you Medical student" },
+            { notify = true, level = 100, message = "Know You Are Resident Doctor" },
+            { notify = true, level = 200, message = "You can choose you specialty. Doctor!" },
+            { notify = true, level = 300, message = "My Mother have some ackes in his back could you help it Surgeon" },
+
+        }
     },
     lockpicking = {
         icon = 'fas fa-unlock',
@@ -117,7 +106,7 @@ Config.Skills = {
             { notify = true, level = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!" },
         }
     },
-    foodelivery = {
+    delivery = {
         icon = 'fas fa-star',
         label = 'Food delivery job rep',
         messages = {
@@ -128,69 +117,5 @@ Config.Skills = {
             { level = 500, message = "Do you even have a life?? Employee of the year!", sender = "FeedStars HR", subject = "FeedStars" },
         }
     },
-    -- AREAS
-    areagroove = {
-        hide = true,
-        icon = 'fas fa-globe',
-    },
-    areafudge = {
-        hide = true,
-        icon = 'fas fa-globe',
-    },
-    arealittleseoul = {
-        hide = true,
-        icon = 'fas fa-globe',
-    },
-    areavinewood = {
-        hide = true,
-        icon = 'fas fa-globe',
-    },
-    areaforumdr = {
-        hide = true,
-        icon = 'fas fa-globe',
-    },
-    areajamestown = {
-        hide = true,
-        icon = 'fas fa-globe',
-    },
-    areavespbeach = {
-        hide = true,
-        icon = 'fas fa-globe',
-    },
-    areavespdocks = {
-        hide = true,
-        icon = 'fas fa-globe',
-    },
-    areauniversity = {
-        hide = true,
-        icon = 'fas fa-globe',
-    },
-    areastabcity = {
-        hide = true,
-        icon = 'fas fa-globe',
-    },
-    areahippiecamp = {
-        hide = true,
-        icon = 'fas fa-globe',
-    },
-    areahobocamppaleto = {
-        hide = true,
-        icon = 'fas fa-globe',
-    },
-    areagrapeseed = {
-        hide = true,
-        icon = 'fas fa-globe',
-    },
-    areasandytown = {
-        hide = true,
-        icon = 'fas fa-globe',
-    },
-    areasouthcity = {
-        hide = true,
-        icon = 'fas fa-globe',
-    },
-    areanorthcity = {
-        hide = true,
-        icon = 'fas fa-globe',
-    }
+    
 }

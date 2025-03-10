@@ -2,7 +2,12 @@ local RSGCore = exports['rsg-core']:GetCoreObject()
 local useDebug = Config.Debug
 
 function notify(message, type)
-    RSGCore.Functions.Notify(message, type)
+    -- RSGCore.Functions.Notify(message, type)
+    lib.notify({
+        title = 'Reputation',
+        description = message,
+        type = type
+    })
 end
 
 function getLevel(currentSkill, skillName)
@@ -63,7 +68,7 @@ local function handleNotification(skill, prevAmount, newAmount)
                         title = sender..': '..subject,
                         description = message,
                         type = 'success',
-                        iconAnimation:'bounce',
+                        iconAnimation='bounce',
                         icon = 'fa-solid fa-circle-up'
                     })
                 end
